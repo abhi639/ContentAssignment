@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Article</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container h-100">
+    		<div class="row h-100">
+				<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+					<div class="d-table-cell align-middle">
+
+						<div class="text-center mt-4">
+							    
+							<h1 class="h2">Add Article</h1>
+													</div>
+<a href="/list" class="previous">&laquo; Previous</a>
+						<div class="card">
+							<div class="card-body">
+								<div class="m-sm-4">
+									<form action="#" id="articleForm" th:object="${article}" method="post"  enctype="multipart/form-data">
+									
+										<div class="form-group">
+											<label>Title</label>
+											<input th:field="*{title}" class="form-control form-control-lg" type="text" id="title" placeholder="Enter title">
+										</div>
+										 <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control form-control-lg" th:field="*{description}" id="description" rows="5" placeholder="Enter description"></textarea>
+            </div>
+            <div class="row g-4 align-items-center">
+            <div class="col-auto">
+             
+										 
+                <label for="publishDate">Publish Date:</label>
+                </div>
+                  <div class="col-auto w-50" >
+                <input type="date" th:field="*{publishDate}" class="form-control" id="publishDate">
+          </div>
+				</div>						
+				   <div class="row g-4 align-items-center mt-3">
+            <div class="col-auto">
+                <label for="author">Author:</label>
+                </div>
+                  <div class="col-auto w-75" >
+                <select class="form-control" id="author" th:field="*{author}" required>
+                    <option th:each="authorOption : ${authors}" th:value="${authorOption.id}" th:text="${authorOption.name}"></option>
+                </select>
+                </div>
+                </div>
+          <div class="row g-4 align-items-center mt-3">
+                
+                                  <div class="col-auto">
+                
+             <label for="banner">Banner:</label>
+             </div>
+               <div class="col-auto">
+                <input type="file" name="banner" class="form-control-file" id="bannerInput">
+            </div>
+                 </div>
+                     <div>
+            <img id="bannerImage" src="" hidden="true" alt="Current Banner" style="max-width: 200px; max-height: 200px;">
+        </div>
+										<div class="text-center mt-3">
+            <button type="submit" class="btn  btn-primary w-50">Save</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="/script.js"></script>
+</body>
+</html>

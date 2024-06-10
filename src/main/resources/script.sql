@@ -1,0 +1,1 @@
+INSERT INTO `assignment`.`users`(`id`,`mail_id`,`name`) values(1,'abhijitkumbhar924@gmail.com','abhijit'),(2,'abhijitkumbhar0049@gmail.com','ajinkya');

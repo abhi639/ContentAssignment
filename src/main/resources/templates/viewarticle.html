@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content View</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous">
+              <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+          
+</head>
+<body>
+<div class="container mt-5" th:object="${articles}">
+  <input type="hidden"  id="bannerdata" th:field="${articles.banner}" >
+  <a href="/list" class="previous">&laquo; Previous</a>
+  
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0" th:text="${articles.title}"></h5>
+        </div>
+          <img id="bannerImage" hidden="true" src="" style="    width: 27%;
+    height: 20%;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;" alt="...">
+          
+        
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 fw-bold fs-2 text-muted">Discription</h6>
+            <p class="card-text" th:text="${articles.description}"></p><i class="fa fa-pen" style="float: right;"><span th:text="${articles.author.name}"></span></i>
+        </div>
+        <div class="card-footer text-muted">
+            <div class="row">
+                <div class="col">
+                   <i class="fa fa-calendar"></i><p class="card-text" th:text="${articles.publishDate}"></p> 
+                </div>
+                <div class="col text-right">
+                   <i class="fa fa-bars"></i><p class="card-text"  th:text="${articles.status}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function () {
+	var currentImageName = $('#bannerdata').val();
+    // This should be the file name of the current image
+    console.log("current image=",currentImageName)
+    if (currentImageName) {
+        $.ajax({
+            url: 'http://localhost:8080/image/'+currentImageName,
+            method: 'GET',
+            
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function(data) {
+            	$('#bannerImage').removeAttr('hidden');
+                console.log("current =",data)
+
+                var url = URL.createObjectURL(data);
+                $('#bannerImage').attr('src', url);
+            },
+            error: function() {
+                console.error('Failed to fetch image from the database');
+            }
+        });
+    }
+	  
+	  
+	});  
+</script>
+</body>
+</html>
